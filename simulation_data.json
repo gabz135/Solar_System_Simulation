@@ -1,13 +1,13 @@
 {
-    "timestep": 0.001,
-    "num_timesteps": 100000,
+    "timestep": 0.01,
+    "num_timesteps": 10000,
     
     "bodies":
     [
 	{
 	    "name": "sun",
 	    "mass": 332946.0,
-	    "orbital_radius": 5.0,
+	    "orbital_radius": 0.0,
 	    "colour": "y"
 	},
 	{
