@@ -81,7 +81,7 @@ class Simulation():
     def calc_store_tot_energy(self):
         """Calculates the total energy of system at a regular interval and saves that data to file.
         """
-        frequency = 50 #calculates the energy every frequency number of timesteps.
+        frequency = 50 #calculates the energy every frequency number of timesteps. if changed, change it in the graphing function too.
 
         i = 0
         while i < self.num_timesteps:
@@ -144,14 +144,14 @@ class Simulation():
         return self.patch_list
  
     def animate_simulation(self):
-        """Animates the simulation of the solar sysemt.
+        """Animates the simulation of the solar system.
         """
         fig = plt.figure()
         ax = plt.axes()
 
         for i in range(len(self.body_list)):
             position = tuple(map(float, self.body_list[i].position_list[0]))
-            radius = 0.3 
+            radius = 0.2
             colour = self.body_list[i].colour
 
             current_body_circle = plt.Circle(position, radius, color=colour, animated=True)
@@ -159,8 +159,11 @@ class Simulation():
 
         ax.axis('scaled')
         #x and y-axis are in the unit of AU
-        ax.set_xlim(-40, 40)
-        ax.set_ylim(-40, 40)
+        ax.set_xlim(-6, 6)
+        ax.set_ylim(-6, 6)
+
+        plt.xlabel("x position (AU)")
+        plt.ylabel("y position (AU)")
 
         numFrames = self.num_timesteps
         self.anim = FuncAnimation(fig, self._animate, numFrames, repeat=False, interval=20, blit=True)
@@ -219,8 +222,8 @@ class Simulation():
             
             output_string += body.name + ": \n"
             output_string += ("Actual orbital period: " + str(NASA_orbital_periods[body.name]) + "\t" + 
-                              "Simulation orbital period: " + str(body.orbital_period) + "\n" +
-                              "Percentage difference: " + str(percentage_difference) + "\n\n")
+                              "Simulation orbital period: " + str(round(body.orbital_period,3)) + "\n" +
+                              "Percentage difference: " + str(round(percentage_difference,3)) + "% \n\n")
             
         #printing the comparison of orbital periods
         width = os.get_terminal_size().columns
@@ -238,8 +241,12 @@ class Simulation():
         """
         plt.plot(self.tot_energy_list, marker='o', linestyle='-')
 
-        plt.xlabel("Time")
-        plt.ylabel("Energy Value")
+        #fixes the offset of time to make it accurate
+        current_xticks = plt.xticks()[0]
+        plt.xticks(current_xticks, (current_xticks * 50) * self.timestep) #50 is the frequeny at which energy was calculated
+
+        plt.xlabel("Time (years)")
+        plt.ylabel(r"Energy Value ($M_{\oplus} \cdot \frac{\text{AU}^2}{\text{yr}^2}$)")
         plt.title("Total energy of system over timesteps")
 
         plt.show()
