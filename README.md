@@ -1,6 +1,6 @@
 # Solar System Simulation
 
-A Python-based N-body simulation modelling the motion of planets under gravitational forces. The project implements the Beeman integration method and compares its energy conservation with the Direct Euler and Euler-Cromer methods.
+A Python-based N-body simulation developed as part of the University of Edinburgh's Computer Simulation course, modelling the motion of planets under gravitational forces. The project implements the Beeman integration method and compares its energy conservation with the Direct Euler and Euler-Cromer methods.
 
 The simulation can be configured with different planets, timesteps and simulation durations, and includes an animation for visualising planetary motion. System energy is also calculated to evaluate the accuracy and stability of the numerical integration methods.
 
@@ -32,6 +32,8 @@ The simulation can be configured with different planets, timesteps and simulatio
 ### Requirements
 
 - Python 3
+- NumPy
+- Matplotlib
 
 ### Running the Simulation
 
@@ -66,7 +68,3 @@ To use a different unit system, the following values need to be updated:
 - `constants.py` - gravitational constant `G` and the Sun's mass
 - `simulation_data.json` - planetary data and timestep
 - `simulation.py` - x and y limits used by the animation
-
-## Course Context
-
-This project was developed as part of the University of Edinburgh's Computer Simulation course.
