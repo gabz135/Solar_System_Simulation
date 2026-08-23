@@ -1,0 +1,5 @@
+__pycache__/
+*.py[cod]
+
+# Generated simulation output
+system_energy.txt
